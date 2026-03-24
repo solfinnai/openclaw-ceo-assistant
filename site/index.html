@@ -3891,7 +3891,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
 function unlockQuiz() {
   var pw = document.getElementById('qGatePw').value;
-  if (pw === 'DEEZNAUTS') {
+  if (['DEEZNAUTS','NINJAS','ENCLAVE','GKLABS'].includes(pw)) {
     document.getElementById('qGate').style.display = 'none';
     document.getElementById('qContainer').style.display = 'block';
     document.getElementById('qNav').style.display = 'flex';
