@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eva Online — Access</title>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Chakra Petch', sans-serif; background: #F1E3EB; color: #48333D; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+.gate { text-align: center; max-width: 400px; padding: 40px; }
+.gate img { width: 100px; height: 100px; border-radius: 50%; border: 3px solid #FF007A; box-shadow: 0 0 30px rgba(255,0,122,0.2); margin-bottom: 24px; }
+.gate h1 { font-size: 24px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; }
+.gate p { color: #8a6b7a; font-size: 14px; margin-bottom: 24px; }
+.gate input { width: 100%; padding: 14px 18px; border: 1px solid rgba(72,51,61,0.2); border-radius: 8px; font-family: inherit; font-size: 16px; background: rgba(255,255,255,0.5); text-align: center; letter-spacing: 2px; outline: none; }
+.gate input:focus { border-color: #FF007A; }
+.gate button { width: 100%; padding: 14px; margin-top: 16px; background: #FF007A; color: white; border: none; border-radius: 8px; font-family: inherit; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; }
+.gate button:hover { opacity: 0.9; }
+.gate .error { color: #FF007A; font-size: 13px; margin-top: 12px; display: none; }
+</style>
+</head>
+<body>
+<div class="gate">
+  <img src="images/eva-face.png" alt="Eva-01">
+  <h1>Eva Online</h1>
+  <p>Enter access code to continue</p>
+  <input type="password" id="pw" placeholder="Access code" onkeydown="if(event.key==='Enter')checkPw()">
+  <button onclick="checkPw()">Enter</button>
+  <div class="error" id="err">Invalid access code. Try again.</div>
+</div>
+<script>
+function checkPw() {
+  var p = document.getElementById('pw').value;
+  if (p === 'DEEZNAUTS') {
+    sessionStorage.setItem('eva_access', 'granted');
+    window.location.href = '/index.html';
+  } else {
+    document.getElementById('err').style.display = 'block';
+  }
+}
+if (sessionStorage.getItem('eva_access') === 'granted') {
+  window.location.href = '/index.html';
+}
+</script>
+</body>
+</html>
