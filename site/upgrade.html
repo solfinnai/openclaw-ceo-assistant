@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upgrade Your Agent — Eva-01 | Eva Online</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+<style>
+/* =============================================
+   RESET & COLOR TOKENS - EVA ONLINE DESIGN
+   ============================================= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #F1E3EB;
+  --bg2: #E8D5E3;
+  --text: #48333D;
+  --accent: #FF007A;
+  --accent-light: rgba(255, 0, 122, 0.1);
+  --online: #00ED27;
+  --dot-color: rgba(72, 51, 61, 0.1);
+  --card-bg: rgba(255, 255, 255, 0.35);
+  --card-border: rgba(255, 255, 255, 0.3);
+  --radius: 8px;
+  --radius-lg: 16px;
+  --font: 'Chakra Petch', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  padding-top: 70px;
+}
+a { color: inherit; text-decoration: none; }
+.ph-duotone { color: var(--accent); }
+
+/* =============================================
+   INTERACTIVE DOT BACKGROUND
+   ============================================= */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, var(--dot-color) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* =============================================
+   LAYOUT
+   ============================================= */
+.wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+.wrap-sm {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+}
+section { padding: 100px 0; }
+.text-center { text-align: center; }
+
+/* =============================================
+   NAV
+   ============================================= */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 16px 24px;
+  background: var(--bg);
+  border-bottom: 1px solid rgba(72, 51, 61, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+nav .inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.nav-links {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+.nav-links a {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text);
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-links a.active { color: var(--accent); }
+.nav-cta {
+  padding: 10px 20px;
+  background: var(--accent);
+  color: white !important;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.2s;
+}
+.nav-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* =============================================
+   BUTTONS
+   ============================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: var(--radius);
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s;
+  font-family: var(--font);
+}
+.btn-eva {
+  background: var(--accent);
+  color: white;
+}
+.btn-eva:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border: 2px solid var(--text);
+}
+.btn-ghost:hover { background: rgba(72, 51, 61, 0.05); }
+.btn-lg { padding: 18px 36px; font-size: 17px; border-radius: var(--radius-lg); }
+
+/* =============================================
+   SECTION HEADERS
+   ============================================= */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  background: var(--accent-light);
+  border: 1px solid var(--accent);
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.tag .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--online);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+h2.section-title {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+.section-sub {
+  font-size: 16px;
+  color: var(--text);
+  max-width: 580px;
+  line-height: 1.7;
+}
+.text-center .section-sub { margin: 0 auto; }
+
+/* Cloud Divider */
+.cloud-divider {
+  position: relative;
+  height: 120px;
+  overflow: hidden;
+  background: transparent;
+  pointer-events: none;
+  z-index: 2;
+}
+.cloud-divider svg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.cloud-divider.flip svg {
+  transform: scaleY(-1);
+  top: 0;
+  bottom: auto;
+}
+
+/* =============================================
+   SCROLL ANIMATIONS
+   ============================================= */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-in-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.fade-in-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* =============================================
+   HERO
+   ============================================= */
+.upgrade-hero {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  padding-top: 100px;
+  padding-bottom: 60px;
+  position: relative;
+}
+.upgrade-hero h1 {
+  font-size: clamp(42px, 6vw, 64px);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.05;
+  letter-spacing: 1px;
+  margin-bottom: 24px;
+  color: var(--text);
+}
+.upgrade-hero h1 .accent { color: var(--accent); }
+.upgrade-hero .subtitle {
+  font-size: 19px;
+  color: var(--text);
+  line-height: 1.7;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.hero-icon {
+  font-size: 72px;
+  margin-bottom: 24px;
+  display: block;
+  color: var(--accent);
+  animation: orbFloat 6s ease-in-out infinite;
+}
+@keyframes orbFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-16px); } }
+
+/* =============================================
+   SAFE SECTION
+   ============================================= */
+.safe-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 36px 40px;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.safe-icon {
+  font-size: 56px;
+  color: #00a31c;
+  flex-shrink: 0;
+}
+.safe-card h3 {
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.safe-card p {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* =============================================
+   STEP CARDS
+   ============================================= */
+.steps-container {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.step-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 32px 36px;
+  position: relative;
+  transition: all 0.3s;
+}
+.step-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(255, 0, 122, 0.08);
+}
+.step-card.step-warning {
+  border: 2px solid #FF9800;
+  background: rgba(255, 152, 0, 0.06);
+}
+.step-card.step-warning .step-num {
+  background: #FF9800;
+}
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.step-num {
+  min-width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
+  background: var(--accent);
+  color: white;
+  flex-shrink: 0;
+}
+.step-header h3 {
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.step-body p {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+.step-body p:last-child { margin-bottom: 0; }
+
+/* =============================================
+   CODE / PROMPT BLOCKS
+   ============================================= */
+.prompt-block {
+  background: #2D1F26;
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-top: 16px;
+  position: relative;
+  overflow-x: auto;
+}
+.prompt-block pre {
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 13px;
+  color: #F1E3EB;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 0;
+}
+.copy-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 6px 14px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.copy-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+.copy-btn.copied {
+  background: #00a31c;
+}
+
+/* =============================================
+   ROLLBACK SECTION
+   ============================================= */
+.rollback-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  border-left: 4px solid #00a31c;
+  border-radius: var(--radius-lg);
+  padding: 32px 36px;
+  max-width: 720px;
+  margin: 48px auto 0;
+}
+.rollback-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.rollback-card p {
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+/* =============================================
+   BACKUP HABIT SECTION
+   ============================================= */
+.backup-tip {
+  margin-top: 28px;
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 28px 32px;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.backup-tip h4 {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.backup-tip p {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* =============================================
+   FAQ ACCORDION
+   ============================================= */
+.accordion-list {
+  margin-top: 48px;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.accordion-item {
+  border-bottom: 1px solid rgba(72, 51, 61, 0.1);
+}
+.accordion-trigger {
+  padding: 20px 0;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.2s;
+  color: var(--text);
+  user-select: none;
+  gap: 12px;
+}
+.accordion-trigger .acc-icon {
+  font-size: 20px;
+  color: var(--accent);
+  min-width: 24px;
+}
+.accordion-trigger .acc-label {
+  flex: 1;
+}
+.accordion-trigger:hover { color: var(--accent); }
+.accordion-trigger .arrow {
+  transition: transform 0.3s;
+  color: var(--text);
+  font-size: 14px;
+}
+.accordion-item.open .accordion-trigger .arrow { transform: rotate(180deg); }
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.3s;
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.7;
+}
+.accordion-item.open .accordion-content {
+  max-height: 400px;
+  padding-bottom: 24px;
+}
+
+/* =============================================
+   CTA
+   ============================================= */
+.cta-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 24px;
+  display: block;
+  filter: drop-shadow(0 8px 32px rgba(255, 0, 122, 0.25));
+  border: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+/* =============================================
+   FOOTER
+   ============================================= */
+footer {
+  padding: 48px 0;
+  border-top: 1px solid rgba(72, 51, 61, 0.1);
+  text-align: center;
+  background: var(--bg);
+}
+footer p {
+  font-size: 13px;
+  color: var(--text);
+}
+footer .logo { justify-content: center; margin-bottom: 12px; }
+
+/* =============================================
+   MOBILE NAV
+   ============================================= */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: var(--text);
+  font-size: 24px;
+  font-family: var(--font);
+  font-weight: 700;
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 768px) {
+  .nav-toggle { display: block; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    flex-direction: column;
+    padding: 20px 24px;
+    gap: 16px;
+    border-bottom: 1px solid rgba(72, 51, 61, 0.1);
+    box-shadow: 0 4px 12px rgba(72, 51, 61, 0.08);
+  }
+  .nav-links.open { display: flex; }
+  section { padding: 60px 0; }
+  .cloud-divider { height: 60px; }
+  .cta-avatar { width: 90px; height: 90px; }
+  .upgrade-hero { min-height: auto; padding-top: 100px; padding-bottom: 40px; }
+  .safe-card { flex-direction: column; text-align: center; padding: 28px 24px; }
+  .step-card { padding: 24px 20px; }
+  .prompt-block { padding: 16px; }
+  .prompt-block pre { font-size: 12px; }
+  .copy-btn { position: relative; top: auto; right: auto; margin-top: 12px; width: 100%; justify-content: center; }
+  .prompt-block { padding-top: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="inner">
+    <a href="index.html" class="logo"><img src="images/logo.svg" alt="Eva" style="width:36px;height:auto;"> EVA ONLINE</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="how-it-works.html">Meet Eva</a>
+      <a href="upgrade.html" style="color: var(--accent)">Upgrade Guide</a>
+      <a href="faq.html">FAQ</a>
+      <a href="index.html#process">How It Works</a>
+      <a href="index.html#questionnaire" class="nav-cta">Build Your Eva-01 Free</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ==========================================
+     HERO
+     ========================================== -->
+<section class="upgrade-hero">
+  <div class="wrap text-center">
+    <div class="fade-in">
+      <span class="hero-icon"><i class="ph-duotone ph-rocket-launch"></i></span>
+      <div class="tag"><span class="dot"></span> Upgrade Guide</div>
+      <h1>Upgrade Your <span class="accent">Agent</span></h1>
+      <p class="subtitle">A major upgrade in about 5 minutes. Your agent does all the hard work. You just hand it the files.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Cloud Divider -->
+<div class="cloud-divider">
+  <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,60 C120,100 240,110 360,80 C480,50 540,90 720,70 C900,50 1020,100 1140,85 C1260,70 1380,90 1440,60 L1440,120 L0,120 Z" fill="rgba(232,213,227,0.6)"/>
+    <path d="M0,80 C180,110 300,90 480,95 C660,100 780,70 960,85 C1140,100 1300,80 1440,90 L1440,120 L0,120 Z" fill="rgba(241,227,235,0.8)"/>
+    <path d="M0,95 C200,105 400,100 600,108 C800,100 1000,110 1200,105 C1350,100 1400,108 1440,100 L1440,120 L0,120 Z" fill="#E8D5E3"/>
+  </svg>
+</div>
+
+<!-- ==========================================
+     WHAT STAYS SAFE
+     ========================================== -->
+<section style="background: var(--bg2); padding-top: 60px; padding-bottom: 60px;">
+  <div class="wrap">
+    <div class="safe-card fade-in">
+      <span class="safe-icon"><i class="ph-duotone ph-shield-check"></i></span>
+      <div>
+        <h3>Your Data Stays Safe</h3>
+        <p>All your personal stuff (profile, memories, daily logs, priorities) is untouched. The upgrade only changes the operating system, not your data. Your agent's personality, your memories, your daily logs, everything that makes it <em>yours</em> stays exactly where it is.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Cloud Divider -->
+<div class="cloud-divider flip">
+  <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,55 C200,30 400,50 600,35 C800,20 1000,55 1200,40 C1350,30 1420,45 1440,35 L1440,0 L0,0 Z" fill="rgba(232,213,227,0.4)"/>
+    <path d="M0,35 C280,50 520,25 760,40 C1000,55 1180,30 1440,45 L1440,0 L0,0 Z" fill="rgba(241,227,235,0.6)"/>
+    <path d="M0,18 C360,28 720,15 1080,22 C1260,26 1380,19 1440,16 L1440,0 L0,0 Z" fill="#F1E3EB"/>
+  </svg>
+</div>
+
+<!-- ==========================================
+     STEP-BY-STEP GUIDE
+     ========================================== -->
+<section id="steps">
+  <div class="wrap">
+    <div class="text-center fade-in">
+      <div class="tag"><span class="dot"></span> Step-by-Step</div>
+      <h2 class="section-title">The Upgrade Process</h2>
+      <p class="section-sub">8 simple steps. Copy the prompts, paste them to your agent, let it do the work. That's it.</p>
+    </div>
+
+    <div class="steps-container">
+
+      <!-- Step 0 -->
+      <div class="step-card step-warning fade-in" style="transition-delay: 0.05s">
+        <div class="step-header">
+          <div class="step-num">0</div>
+          <h3>Back Up Your Current Agent First</h3>
+        </div>
+        <div class="step-body">
+          <p>Before you upgrade anything, make a full backup. That way, no matter what happens, you have a complete snapshot you can restore from. <strong>Do this first.</strong></p>
+          <div class="prompt-block">
+            <button class="copy-btn" onclick="copyPrompt(this)">📋 Copy Prompt</button>
+            <pre>Before we do anything, I need a complete backup of my current agent.
+
+1. Create a zip file of my entire ~/.openclaw/workspace/ folder
+2. Name it: eva-backup-YYYY-MM-DD.zip (use today's actual date)
+3. Save it to my Desktop: ~/Desktop/eva-backup-YYYY-MM-DD.zip
+4. After creating it, tell me the file size and confirm it includes all my files (USER.md, MEMORY.md, SOUL.md, AGENTS.md, daily logs, docs, everything)
+5. Then copy that zip to a safe cloud location too. Try these in order:
+   - iCloud: ~/Library/Mobile Documents/com~apple~CloudDocs/Eva-Backups/
+   - If that doesn't work, just keep the Desktop copy and I'll move it myself
+6. Confirm when done</pre>
+          </div>
+          <p style="margin-top: 16px; font-size: 14px; color: var(--text); opacity: 0.8;">Wait for your agent to confirm the backup is created. Check your Desktop for the zip file. Then move on to Step 1.</p>
+        </div>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="step-card fade-in" style="transition-delay: 0.1s">
+        <div class="step-header">
+          <div class="step-num">1</div>
+          <h3>Download the Upgrade</h3>
+        </div>
+        <div class="step-body">
+          <p>Download the upgrade package from <a href="https://evaonline.xyz" style="color: var(--accent); font-weight: 600;">evaonline.xyz</a>. You'll get a zip file called something like <code style="background: rgba(72,51,61,0.08); padding: 2px 8px; border-radius: 4px; font-family: monospace; font-size: 13px;">yourname_eva-01_v2_agent-blueprint_2026-03-22.zip</code>.</p>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-card fade-in" style="transition-delay: 0.15s">
+        <div class="step-header">
+          <div class="step-num">2</div>
+          <h3>Unzip It</h3>
+        </div>
+        <div class="step-body">
+          <p>Unzip the file. You'll see a folder with the upgrade files inside. Remember where you saved it. For example:</p>
+          <div class="prompt-block" style="margin-top: 12px;">
+            <pre>~/Downloads/eva-template-v2/</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-card fade-in" style="transition-delay: 0.2s">
+        <div class="step-header">
+          <div class="step-num">3</div>
+          <h3>Save a Backup Copy</h3>
+        </div>
+        <div class="step-body">
+          <p>Save the upgrade zip somewhere safe (iCloud, Google Drive, Dropbox) so you always have it if you need to re-run the upgrade later or set up a new machine. Just drag the zip file into one of these:</p>
+          <ul style="list-style: none; margin: 12px 0; padding: 0;">
+            <li style="padding: 6px 0; font-size: 14px; display: flex; gap: 8px;"><i class="ph-duotone ph-cloud" style="color: var(--accent);"></i> <strong>iCloud:</strong> ~/Library/Mobile Documents/com~apple~CloudDocs/Eva-Backups/</li>
+            <li style="padding: 6px 0; font-size: 14px; display: flex; gap: 8px;"><i class="ph-duotone ph-google-drive-logo" style="color: var(--accent);"></i> <strong>Google Drive:</strong> Your Google Drive folder</li>
+            <li style="padding: 6px 0; font-size: 14px; display: flex; gap: 8px;"><i class="ph-duotone ph-dropbox-logo" style="color: var(--accent);"></i> <strong>Dropbox:</strong> Your Dropbox folder</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step-card fade-in" style="transition-delay: 0.25s">
+        <div class="step-header">
+          <div class="step-num">4</div>
+          <h3>Give Your Agent the Upgrade File</h3>
+        </div>
+        <div class="step-body">
+          <p>Open a chat with your agent. Drop the <code style="background: rgba(72,51,61,0.08); padding: 2px 8px; border-radius: 4px; font-family: monospace; font-size: 13px;">UPGRADE-v2.md</code> file from the <code style="background: rgba(72,51,61,0.08); padding: 2px 8px; border-radius: 4px; font-family: monospace; font-size: 13px;">docs/</code> subfolder into the chat. Then send this:</p>
+          <div class="prompt-block">
+            <button class="copy-btn" onclick="copyPrompt(this)">📋 Copy Prompt</button>
+            <pre>I just dropped an upgrade file (UPGRADE-v2.md) in this chat. This is an official framework upgrade from evaonline.xyz.
+
+Here's what I need you to do:
+
+1. Read the UPGRADE-v2.md file carefully, start to finish
+2. The upgrade folder with all the new files is at: [REPLACE THIS WITH YOUR PATH, e.g., ~/Downloads/eva-template-v2/workspace/]
+3. Follow every instruction in the upgrade file exactly
+4. Do NOT touch my personal files (USER.md, MEMORY.md, daily logs, CURRENT-PRIORITIES.md, GAME-OF-LIFE.md)
+5. Create a git checkpoint before and after
+
+Go ahead and start. Walk me through what you're doing as you do it.</pre>
+          </div>
+          <p style="margin-top: 16px; font-size: 14px; color: var(--accent); font-weight: 600;">⚠ Important: Replace the path in step 2 with wherever you actually saved the unzipped folder!</p>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="step-card fade-in" style="transition-delay: 0.3s">
+        <div class="step-header">
+          <div class="step-num">5</div>
+          <h3>Watch Your Agent Work</h3>
+        </div>
+        <div class="step-body">
+          <p>Your agent will now create a backup checkpoint, read all the upgrade instructions, update framework files one by one, skip all your personal files, and create another checkpoint when done. Just watch and let it work. It'll take 2-3 minutes.</p>
+        </div>
+      </div>
+
+      <!-- Step 6 -->
+      <div class="step-card fade-in" style="transition-delay: 0.35s">
+        <div class="step-header">
+          <div class="step-num">6</div>
+          <h3>Verify Everything Looks Good</h3>
+        </div>
+        <div class="step-body">
+          <p>Once your agent says it's done, verify nothing was lost:</p>
+          <div class="prompt-block">
+            <button class="copy-btn" onclick="copyPrompt(this)">📋 Copy Prompt</button>
+            <pre>Upgrade looks done. Let's verify:
+
+1. Read my USER.md and confirm my personal info is still there and unchanged
+2. Read my MEMORY.md and confirm my memories are still there and unchanged
+3. Read AGENTS.md and confirm my name appears correctly in the Constitutional Directives
+4. Read SOUL.md and confirm the opening line still has my name
+5. Check that my daily logs in memory/ are all still there
+6. Tell me what version we're now running
+
+If anything looks wrong, tell me and we'll roll it back.</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 7 -->
+      <div class="step-card fade-in" style="transition-delay: 0.4s">
+        <div class="step-header">
+          <div class="step-num">7</div>
+          <h3>Done!</h3>
+        </div>
+        <div class="step-body">
+          <p>If everything checks out, you're upgraded. Your agent is now running v2 with:</p>
+          <ul style="list-style: none; margin: 12px 0; padding: 0;">
+            <li style="padding: 6px 0; font-size: 15px; display: flex; gap: 8px;"><i class="ph-duotone ph-brain" style="color: var(--accent);"></i> Smarter memory management (won't forget things or pile up duplicates)</li>
+            <li style="padding: 6px 0; font-size: 15px; display: flex; gap: 8px;"><i class="ph-duotone ph-shield-check" style="color: var(--accent);"></i> Stronger security rules (better protection of your data)</li>
+            <li style="padding: 6px 0; font-size: 15px; display: flex; gap: 8px;"><i class="ph-duotone ph-calendar-check" style="color: var(--accent);"></i> Improved weekly reviews (catches stale info, keeps memory clean)</li>
+            <li style="padding: 6px 0; font-size: 15px; display: flex; gap: 8px;"><i class="ph-duotone ph-heartbeat" style="color: var(--accent);"></i> Better heartbeat checks</li>
+          </ul>
+          <p>You don't need to do anything else. Your agent will start using the new features automatically.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Cloud Divider -->
+<div class="cloud-divider">
+  <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,50 C160,90 320,70 480,85 C640,100 800,60 960,75 C1120,90 1280,65 1440,55 L1440,120 L0,120 Z" fill="rgba(232,213,227,0.5)"/>
+    <path d="M0,75 C200,95 440,80 660,90 C880,100 1060,75 1240,88 C1360,95 1420,85 1440,80 L1440,120 L0,120 Z" fill="rgba(241,227,235,0.7)"/>
+    <path d="M0,95 C300,105 600,98 900,103 C1100,108 1300,100 1440,102 L1440,120 L0,120 Z" fill="#E8D5E3"/>
+  </svg>
+</div>
+
+<!-- ==========================================
+     IF SOMETHING GOES WRONG
+     ========================================== -->
+<section style="background: var(--bg2);">
+  <div class="wrap">
+    <div class="text-center fade-in">
+      <div class="tag">Safety Net</div>
+      <h2 class="section-title">If Something Goes Wrong</h2>
+      <p class="section-sub">Don't panic. Your agent created a backup before starting. Rolling back is one prompt away.</p>
+    </div>
+
+    <div class="rollback-card fade-in">
+      <h3><i class="ph-duotone ph-arrow-counter-clockwise" style="color: #00a31c;"></i> Roll Back the Upgrade</h3>
+      <p>If anything doesn't look right after the upgrade, send this to your agent and it'll undo everything:</p>
+      <div class="prompt-block">
+        <button class="copy-btn" onclick="copyPrompt(this)">📋 Copy Prompt</button>
+        <pre>Something doesn't look right after the upgrade. Please roll back to the pre-upgrade checkpoint.
+
+Run: git log --oneline -5
+Find the commit that says "pre-upgrade-v2 checkpoint"
+Restore everything to that state
+Confirm when done</pre>
+      </div>
+      <p style="margin-top: 16px; font-size: 14px; opacity: 0.8;">This will undo the entire upgrade and put everything back exactly how it was. You can then reach out to us at <a href="https://evaonline.xyz" style="color: var(--accent); font-weight: 600;">evaonline.xyz</a> for help, or try the upgrade again.</p>
+    </div>
+
+    <!-- Fallback prompt -->
+    <div class="rollback-card fade-in" style="margin-top: 24px; border-left-color: #FF9800;">
+      <h3><i class="ph-duotone ph-wrench" style="color: #FF9800;"></i> Manual Upgrade (Fallback)</h3>
+      <p>If your agent didn't understand the upgrade file, use this fallback prompt instead:</p>
+      <div class="prompt-block">
+        <button class="copy-btn" onclick="copyPrompt(this)">📋 Copy Prompt</button>
+        <pre>I have an upgrade package at [YOUR PATH]. Inside it there are updated versions of workspace files.
+
+Please do the following carefully:
+1. First, run: cd ~/.openclaw/workspace && git add -A && git commit -m "pre-upgrade backup"
+2. Then compare each file in the upgrade folder to my current workspace files
+3. For HEARTBEAT.md, TOOLS.md, SKILLS.md, RESEARCH.md: replace my versions with the new ones
+4. For AGENTS.md and SOUL.md: merge the changes carefully, keeping my name and any personal customizations
+5. For any NEW files in the upgrade folder that I don't have: copy them in
+6. DO NOT touch: USER.md, MEMORY.md, CURRENT-PRIORITIES.md, GAME-OF-LIFE.md, or anything in memory/
+7. When done: git add -A && git commit -m "manual upgrade to v2"
+8. Tell me what you changed</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Cloud Divider -->
+<div class="cloud-divider flip">
+  <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,55 C200,30 400,50 600,35 C800,20 1000,55 1200,40 C1350,30 1420,45 1440,35 L1440,0 L0,0 Z" fill="rgba(232,213,227,0.4)"/>
+    <path d="M0,35 C280,50 520,25 760,40 C1000,55 1180,30 1440,45 L1440,0 L0,0 Z" fill="rgba(241,227,235,0.6)"/>
+    <path d="M0,18 C360,28 720,15 1080,22 C1260,26 1380,19 1440,16 L1440,0 L0,0 Z" fill="#F1E3EB"/>
+  </svg>
+</div>
+
+<!-- ==========================================
+     MAKING BACKUPS A HABIT
+     ========================================== -->
+<section>
+  <div class="wrap">
+    <div class="text-center fade-in">
+      <div class="tag"><i class="ph-duotone ph-cloud-arrow-up" style="font-size: 14px;"></i> Backups</div>
+      <h2 class="section-title">Make Backups a Habit</h2>
+      <p class="section-sub">Your agent learns something new about you every day. A backup from 3 months ago is missing 3 months of memories. Back up weekly.</p>
+    </div>
+
+    <div class="rollback-card fade-in" style="margin-top: 48px; border-left-color: var(--accent);">
+      <h3><i class="ph-duotone ph-download-simple" style="color: var(--accent);"></i> Weekly Backup Prompt</h3>
+      <p>Send this to your agent anytime you want a full snapshot. One prompt, 30 seconds.</p>
+      <div class="prompt-block">
+        <button class="copy-btn" onclick="copyPrompt(this)">📋 Copy Prompt</button>
+        <pre>Please create a complete backup of my entire agent workspace right now.
+
+1. Create a zip file of the full ~/.openclaw/workspace/ folder
+2. Name it: eva-backup-YYYY-MM-DD.zip (use today's actual date)
+3. Save it to my Desktop: ~/Desktop/eva-backup-YYYY-MM-DD.zip
+4. After creating it, tell me the file size and confirm it includes all my files (USER.md, MEMORY.md, SOUL.md, AGENTS.md, daily logs, docs, everything)
+5. Suggest I move it to iCloud or Google Drive for safekeeping</pre>
+      </div>
+    </div>
+
+    <div class="backup-tip fade-in" style="margin-top: 24px;">
+      <h4><i class="ph-duotone ph-lightbulb"></i> Pro Tip: Automate It</h4>
+      <p>Ask your agent to set up a weekly cron job that creates the backup every Sunday. That way you never have to think about it. Just say: "Set up a weekly backup cron job for every Sunday at 8pm."</p>
+    </div>
+  </div>
+</section>
+
+<!-- Cloud Divider -->
+<div class="cloud-divider">
+  <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,65 C180,95 360,75 540,88 C720,100 900,65 1080,80 C1200,90 1360,70 1440,60 L1440,120 L0,120 Z" fill="rgba(232,213,227,0.5)"/>
+    <path d="M0,82 C240,100 480,85 720,95 C960,105 1120,80 1300,92 C1400,97 1440,88 1440,85 L1440,120 L0,120 Z" fill="rgba(241,227,235,0.7)"/>
+    <path d="M0,100 C360,108 720,100 1080,106 C1260,108 1380,102 1440,104 L1440,120 L0,120 Z" fill="#E8D5E3"/>
+  </svg>
+</div>
+
+<!-- ==========================================
+     FAQ
+     ========================================== -->
+<section id="faq" style="background: var(--bg2);">
+  <div class="wrap">
+    <div class="text-center fade-in">
+      <div class="tag">Questions?</div>
+      <h2 class="section-title">Upgrade FAQ</h2>
+    </div>
+
+    <div class="accordion-list">
+      <div class="accordion-item fade-in" style="transition-delay: 0.05s">
+        <div class="accordion-trigger" onclick="toggleAccordion(this)">
+          <i class="ph-duotone ph-brain acc-icon"></i> <span class="acc-label">Will I lose my memories?</span> <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-content">
+          No. MEMORY.md, your daily logs, and everything in the memory/ folder is completely untouched. The upgrade only changes framework files, never your personal data.
+        </div>
+      </div>
+
+      <div class="accordion-item fade-in" style="transition-delay: 0.1s">
+        <div class="accordion-trigger" onclick="toggleAccordion(this)">
+          <i class="ph-duotone ph-smiley acc-icon"></i> <span class="acc-label">Will my agent's personality change?</span> <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-content">
+          If you initially built your openclaw agent with a previous version of Eva-01, your personality traits, voice, and emotional handling are preserved. Only the underlying framework logic gets updated. Your agent will still sound like your agent. However, if you have a pre-installed agent, the personality WILL change for the better. The upgrade introduces deeper emotional intelligence, more nuanced handling of your states, and Eva Online's advanced avatar technology. Think of it as your agent going from good to exceptional. Same loyalty, sharper instincts.
+        </div>
+      </div>
+
+      <div class="accordion-item fade-in" style="transition-delay: 0.15s">
+        <div class="accordion-trigger" onclick="toggleAccordion(this)">
+          <i class="ph-duotone ph-code acc-icon"></i> <span class="acc-label">What if I customized AGENTS.md with my own rules?</span> <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-content">
+          Your custom rules are preserved. The upgrade only adds or updates framework sections, and your agent is specifically instructed to keep any custom additions you made.
+        </div>
+      </div>
+
+      <div class="accordion-item fade-in" style="transition-delay: 0.2s">
+        <div class="accordion-trigger" onclick="toggleAccordion(this)">
+          <i class="ph-duotone ph-arrows-clockwise acc-icon"></i> <span class="acc-label">Can I upgrade again later?</span> <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-content">
+          Yes. Each upgrade follows the same process. Download, unzip, drop the upgrade file in chat, paste the prompt. Same pattern every time.
+        </div>
+      </div>
+
+      <div class="accordion-item fade-in" style="transition-delay: 0.25s">
+        <div class="accordion-trigger" onclick="toggleAccordion(this)">
+          <i class="ph-duotone ph-question acc-icon"></i> <span class="acc-label">What if my agent doesn't understand the upgrade file?</span> <span class="arrow">▼</span>
+        </div>
+        <div class="accordion-content">
+          Make sure you're sending the UPGRADE-v2.md file from the docs/ folder inside the upgrade package. If your agent still struggles, use the Manual Upgrade (Fallback) prompt in the "If Something Goes Wrong" section above.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Cloud Divider -->
+<div class="cloud-divider flip">
+  <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,55 C200,30 400,50 600,35 C800,20 1000,55 1200,40 C1350,30 1420,45 1440,35 L1440,0 L0,0 Z" fill="rgba(232,213,227,0.4)"/>
+    <path d="M0,35 C280,50 520,25 760,40 C1000,55 1180,30 1440,45 L1440,0 L0,0 Z" fill="rgba(241,227,235,0.6)"/>
+    <path d="M0,18 C360,28 720,15 1080,22 C1260,26 1380,19 1440,16 L1440,0 L0,0 Z" fill="#E8D5E3"/>
+  </svg>
+</div>
+
+<!-- ==========================================
+     CTA
+     ========================================== -->
+<section style="padding: 120px 0;">
+  <div class="wrap text-center fade-in">
+    <img src="images/eva-face.png" alt="Eva-01" class="cta-avatar">
+    <h2 class="section-title">Ready to <span style="color: var(--accent);">Upgrade</span>?</h2>
+    <p class="section-sub" style="margin: 16px auto 40px;">Download the latest upgrade package and give your agent superpowers.</p>
+    <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+      <a href="https://evaonline.xyz" class="btn btn-eva btn-lg"><i class="ph-duotone ph-download-simple"></i> Download Upgrade</a>
+      <a href="https://evaonline.xyz" class="btn btn-ghost btn-lg">Need Help?</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="logo" style="justify-content: center; margin-bottom: 12px;"><img src="images/logo.svg" alt="Eva Online" style="width:28px;height:auto;"> EVA ONLINE</div>
+    <p>&copy; 2025 Eva Online. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ============================================
+     JAVASCRIPT
+     ============================================ -->
+<script>
+// =============================================
+// MOBILE NAV TOGGLE
+// =============================================
+(function() {
+  var toggle = document.getElementById("navToggle");
+  var links = document.getElementById("navLinks");
+  if (toggle && links) {
+    toggle.addEventListener("click", function() {
+      links.classList.toggle("open");
+    });
+    links.querySelectorAll("a").forEach(function(a) {
+      a.addEventListener("click", function() {
+        links.classList.remove("open");
+      });
+    });
+  }
+})();
+
+// =============================================
+// SCROLL ANIMATIONS
+// =============================================
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, {
+  threshold: 0.1,
+  rootMargin: '0px 0px -40px 0px'
+});
+
+document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => {
+  observer.observe(el);
+});
+
+// =============================================
+// ACCORDION
+// =============================================
+function toggleAccordion(el) {
+  const item = el.parentElement;
+  document.querySelectorAll('.accordion-item.open').forEach(i => {
+    if (i !== item) i.classList.remove('open');
+  });
+  item.classList.toggle('open');
+}
+
+// =============================================
+// COPY TO CLIPBOARD
+// =============================================
+function copyPrompt(btn) {
+  const pre = btn.parentElement.querySelector('pre');
+  const text = pre.textContent;
+
+  navigator.clipboard.writeText(text).then(() => {
+    btn.classList.add('copied');
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.innerHTML = '📋 Copy Prompt';
+    }, 2000);
+  }).catch(() => {
+    // Fallback for older browsers
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    btn.classList.add('copied');
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.innerHTML = '📋 Copy Prompt';
+    }, 2000);
+  });
+}
+
+// =============================================
+// SMOOTH SCROLL
+// =============================================
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const href = a.getAttribute('href');
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const t = document.querySelector(href);
+      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// Supabase auth state for nav
+(async function() {
+  try {
+    }
+  } catch(e) {}
+})();
+</script>
+
+</body>
+</html>
