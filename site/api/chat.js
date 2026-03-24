@@ -28,10 +28,10 @@ export default async function handler(req, res) {
         'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini',
+        model: 'gpt-5.4-nano',
         messages: cappedMessages,
         stream: true,
-        max_tokens: 800,
+        max_completion_tokens: 800,
         temperature: 0.8
       })
     });
